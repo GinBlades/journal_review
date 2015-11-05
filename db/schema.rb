@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(version: 20151105135404) do
   add_index "entries", ["user_id"], name: "index_entries_on_user_id", using: :btree
 
   create_table "entry_logs", force: :cascade do |t|
-    t.integer  "entry_id"
-    t.integer  "revision"
-    t.string   "body"
+    t.integer  "entry_id",   null: false
+    t.integer  "revision",   null: false
+    t.string   "body",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 20151105135404) do
   add_index "entry_logs", ["entry_id"], name: "index_entry_logs_on_entry_id", using: :btree
 
   create_table "reviewer_entries", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "entry_id"
+    t.integer  "user_id",    null: false
+    t.integer  "entry_id",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20151105135404) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "bio"
-    t.integer  "role"
+    t.integer  "role",                   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

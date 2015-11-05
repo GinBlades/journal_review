@@ -3,8 +3,7 @@
 
   .form-inputs
     = f.input :name
-    = f.input :body
-    = f.input :token
+    = f.input :body, as: :text
 
   .form-actions
     = f.button :submit, class: 'btn btn-success'

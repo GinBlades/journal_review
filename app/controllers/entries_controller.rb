@@ -16,7 +16,7 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @entry = Entry.new(entry_params)
+    @entry = current_user.entries.build(entry_params)
 
     if @entry.save
       redirect_to @entry, notice: 'Entry was successfully created.'
@@ -44,6 +44,6 @@ class EntriesController < ApplicationController
     end
 
     def entry_params
-      params.require(:entry).permit(:name, :entry_date, :body, :token)
+      params.require(:entry).permit(:name, :body)
     end
 end
