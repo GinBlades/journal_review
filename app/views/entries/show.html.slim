@@ -1,0 +1,11 @@
+table.table.table-striped
+  tr
+    th Name:
+    td= @entry.name
+  tr
+    th Body:
+    td= @entry.body
+
+.btn-group
+  = link_to "Edit", edit_entry_path(@entry), class: "btn btn-default"
+  = link_to "Back", entries_path, class: "btn btn-default"

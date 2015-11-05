@@ -1,0 +1,10 @@
+= simple_form_for(@entry) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :body
+    = f.input :token
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-success'
