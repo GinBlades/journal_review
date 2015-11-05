@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105125100) do
+ActiveRecord::Schema.define(version: 20151105135404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "entries", force: :cascade do |t|
     t.string   "name"
+    t.integer  "user_id"
     t.string   "body",       null: false
     t.string   "token",      null: false
     t.datetime "created_at", null: false
@@ -25,6 +26,27 @@ ActiveRecord::Schema.define(version: 20151105125100) do
   end
 
   add_index "entries", ["token"], name: "index_entries_on_token", unique: true, using: :btree
+  add_index "entries", ["user_id"], name: "index_entries_on_user_id", using: :btree
+
+  create_table "entry_logs", force: :cascade do |t|
+    t.integer  "entry_id"
+    t.integer  "revision"
+    t.string   "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "entry_logs", ["entry_id"], name: "index_entry_logs_on_entry_id", using: :btree
+
+  create_table "reviewer_entries", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "entry_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reviewer_entries", ["entry_id"], name: "index_reviewer_entries_on_entry_id", using: :btree
+  add_index "reviewer_entries", ["user_id"], name: "index_reviewer_entries_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -58,4 +80,8 @@ ActiveRecord::Schema.define(version: 20151105125100) do
   add_index "users", ["role"], name: "index_users_on_role", using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
+  add_foreign_key "entries", "users"
+  add_foreign_key "entry_logs", "entries"
+  add_foreign_key "reviewer_entries", "entries"
+  add_foreign_key "reviewer_entries", "users"
 end

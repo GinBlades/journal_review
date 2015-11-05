@@ -4,4 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :timeoutable
+
+  enum role: [:guest, :member, :manager, :admin]
+
+  has_many :entries, dependent: :destroy
+  has_many :reviewer_entries, dependent: :destroy
 end

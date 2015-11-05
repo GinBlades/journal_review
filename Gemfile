@@ -36,3 +36,5 @@ gem "quiet_assets"
 gem "slim-rails"
 gem "devise"
 gem "hirb"
+
+gem "has_secure_token"
