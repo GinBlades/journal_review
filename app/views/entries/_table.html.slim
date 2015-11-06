@@ -1,0 +1,20 @@
+table.table.table-striped
+  thead
+    tr
+      th Name
+      th Body
+      th
+      th
+      
+  tbody
+    - entries.each do |entry|
+      tr
+        td= entry.name
+        td= entry.body
+        td= link_to "Show", entry
+        td
+          = link_to "Edit", edit_entry_path(entry)
+          '
+          |/
+          '
+          = link_to "Destroy", entry, method: :delete, data: { confirm: "Are you sure?" }

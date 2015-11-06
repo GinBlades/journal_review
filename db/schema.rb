@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20151105135404) do
   add_index "entries", ["user_id"], name: "index_entries_on_user_id", using: :btree
 
   create_table "entry_logs", force: :cascade do |t|
+    t.integer  "user_id",    null: false
     t.integer  "entry_id",   null: false
     t.integer  "revision",   null: false
     t.string   "body",       null: false
@@ -37,6 +38,7 @@ ActiveRecord::Schema.define(version: 20151105135404) do
   end
 
   add_index "entry_logs", ["entry_id"], name: "index_entry_logs_on_entry_id", using: :btree
+  add_index "entry_logs", ["user_id"], name: "index_entry_logs_on_user_id", using: :btree
 
   create_table "reviewer_entries", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -82,6 +84,7 @@ ActiveRecord::Schema.define(version: 20151105135404) do
 
   add_foreign_key "entries", "users"
   add_foreign_key "entry_logs", "entries"
+  add_foreign_key "entry_logs", "users"
   add_foreign_key "reviewer_entries", "entries"
   add_foreign_key "reviewer_entries", "users"
 end

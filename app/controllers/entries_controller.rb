@@ -19,6 +19,7 @@ class EntriesController < ApplicationController
     @entry = current_user.entries.build(entry_params)
 
     if @entry.save
+      @entry.log_entry(current_user)
       redirect_to @entry, notice: 'Entry was successfully created.'
     else
       render :new
@@ -27,6 +28,7 @@ class EntriesController < ApplicationController
 
   def update
     if @entry.update(entry_params)
+      @entry.log_entry(current_user)
       redirect_to @entry, notice: 'Entry was successfully updated.'
     else
       render :edit
