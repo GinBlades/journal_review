@@ -4,14 +4,12 @@ table.table.table-striped
       th Name
       th Body
       th
-      th
       
   tbody
     - entries.each do |entry|
       tr
-        td= entry.name
-        td= entry.body
-        td= link_to "Show", entry
+        td= link_to entry.name, edit_entry_path(entry)
+        td= entry.body.truncate(30)
         td
           = link_to "Edit", edit_entry_path(entry)
           '

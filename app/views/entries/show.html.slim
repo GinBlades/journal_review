@@ -8,3 +8,17 @@ h2
 .btn-group
   = link_to "Edit", edit_entry_path(@entry), class: "btn btn-default"
   = link_to "Back", entries_path, class: "btn btn-default"
+
+h3 History
+
+table.table.table-bordered
+  thead
+    th Revision
+    th Reviewer
+    th Body
+  tbody
+    - @entry.entry_logs.each do |log|
+      tr
+        td.col-md-1= log.revision
+        td.col-md-2= log.user.email
+        td.col-md-9= log.body
