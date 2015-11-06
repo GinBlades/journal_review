@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+ruby "2.2.3"
 
 gem "rails", "4.2.4"
 gem "pg"
@@ -38,3 +39,8 @@ gem "devise"
 gem "hirb"
 
 gem "has_secure_token"
+
+# For Heroku
+gem "rails_12factor", group: :production
+gem "dotenv-rails"
+gem "puma"
