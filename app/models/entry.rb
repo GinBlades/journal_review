@@ -3,6 +3,9 @@ class Entry < ActiveRecord::Base
   belongs_to :user
   has_many :reviewer_entries, dependent: :destroy
   has_many :entry_logs, dependent: :destroy
+  before_save do
+    self.name = "Untitled" if name.blank?
+  end
 
   validates :body, :user_id, presence: true
 

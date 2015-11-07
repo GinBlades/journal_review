@@ -5,7 +5,14 @@ h2
 
 = simple_format @entry.body
 
+h3 Reviewers
+ul.list-unstyled
+  - @entry.reviewer_entries.each do |re|
+    li= link_to re.user.email, "#"
+
 .btn-group
+  = link_to "Add Reviewer", new_entry_reviewer_entry_path(@entry), class: "btn btn-primary"
+  = link_to "Notify Reviewers", notify_reviewers_entry_path(@entry), class: "btn btn-default"
   = link_to "Edit", edit_entry_path(@entry), class: "btn btn-default"
   = link_to "Back", entries_path, class: "btn btn-default"
 

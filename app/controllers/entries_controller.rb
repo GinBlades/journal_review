@@ -1,5 +1,5 @@
 class EntriesController < ApplicationController
-  before_action :set_entry, only: [:show, :edit, :update, :destroy]
+  before_action :set_entry, only: [:show, :edit, :update, :destroy, :notify_reviewers]
 
   def index
     @entries = Entry.all
@@ -29,6 +29,7 @@ class EntriesController < ApplicationController
   def update
     if @entry.update(entry_params)
       @entry.log_entry(current_user)
+      EntryMailer.reviewed_entry(@entry).deliver_now if current_user != @entry.user
       redirect_to @entry, notice: 'Entry was successfully updated.'
     else
       render :edit
@@ -38,6 +39,11 @@ class EntriesController < ApplicationController
   def destroy
     @entry.destroy
     redirect_to entries_url, notice: 'Entry was successfully destroyed.'
+  end
+
+  def notify_reviewers
+    EntryMailer.new_entry(@entry).deliver_now
+    redirect_to @entry, notice: "The reviewers have been notified."
   end
 
   private
