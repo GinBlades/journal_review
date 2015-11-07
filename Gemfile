@@ -44,3 +44,4 @@ gem "has_secure_token"
 gem "rails_12factor", group: :production
 gem "dotenv-rails"
 gem "puma"
+gem "postmark-rails"

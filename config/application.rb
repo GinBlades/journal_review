@@ -44,5 +44,8 @@ module JournalReview
         request_specs: false
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
+
+    config.action_mailer.delivery_method = :postmark
+    config.action_mailer.postmark_settings = { api_token: Rails.application.secrets.postmark_api_token }
   end
 end

@@ -9,4 +9,5 @@ class User < ActiveRecord::Base
 
   has_many :entries, dependent: :destroy
   has_many :reviewer_entries, dependent: :destroy
+  has_many :entry_logs, dependent: :destroy
 end
