@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   enum role: [:guest, :member, :manager, :admin]
 
   has_many :entries, dependent: :destroy
-  has_many :reviewer_entries, dependent: :destroy
+  has_many :entry_reviewers, dependent: :destroy
   has_many :entry_logs, dependent: :destroy
 
   def to_s

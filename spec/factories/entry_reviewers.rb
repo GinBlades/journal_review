@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :reviewer_entry do
+  factory :entry_reviewer do
     user nil
 entry nil
   end

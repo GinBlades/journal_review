@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105135404) do
+ActiveRecord::Schema.define(version: 20151109113432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,15 +40,15 @@ ActiveRecord::Schema.define(version: 20151105135404) do
   add_index "entry_logs", ["entry_id"], name: "index_entry_logs_on_entry_id", using: :btree
   add_index "entry_logs", ["user_id"], name: "index_entry_logs_on_user_id", using: :btree
 
-  create_table "reviewer_entries", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "entry_id",   null: false
+  create_table "entry_reviewers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "entry_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "reviewer_entries", ["entry_id"], name: "index_reviewer_entries_on_entry_id", using: :btree
-  add_index "reviewer_entries", ["user_id"], name: "index_reviewer_entries_on_user_id", using: :btree
+  add_index "entry_reviewers", ["entry_id"], name: "index_entry_reviewers_on_entry_id", using: :btree
+  add_index "entry_reviewers", ["user_id"], name: "index_entry_reviewers_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -85,6 +85,6 @@ ActiveRecord::Schema.define(version: 20151105135404) do
   add_foreign_key "entries", "users"
   add_foreign_key "entry_logs", "entries"
   add_foreign_key "entry_logs", "users"
-  add_foreign_key "reviewer_entries", "entries"
-  add_foreign_key "reviewer_entries", "users"
+  add_foreign_key "entry_reviewers", "entries"
+  add_foreign_key "entry_reviewers", "users"
 end

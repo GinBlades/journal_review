@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  get 'entry_reviewers/new'
+
   resources :entries do
-    resources :reviewer_entries
+    resources :entry_reviewers
     member do
       get :notify_reviewers
     end

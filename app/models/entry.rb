@@ -1,7 +1,7 @@
 class Entry < ActiveRecord::Base
   has_secure_token :token
   belongs_to :user
-  has_many :reviewer_entries, dependent: :destroy
+  has_many :entry_reviewers, dependent: :destroy
   has_many :entry_logs, dependent: :destroy
   before_save do
     self.name = "Untitled" if name.blank?
