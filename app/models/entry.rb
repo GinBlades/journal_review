@@ -15,4 +15,13 @@ class Entry < ActiveRecord::Base
     return if last_entry && (body == last_entry.body)
     EntryLog.create(entry_id: id, body: body, revision: revision_number, user_id: user.id)
   end
+
+  def last_log
+    entry_logs.includes(:user).order(:updated_at).last
+  end
+
+  def reviewer_notified?
+    return true if last_log.user != user || (reviewer_notified && reviewer_notified > last_log.updated_at)
+    false
+  end
 end

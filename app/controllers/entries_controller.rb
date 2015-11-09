@@ -43,6 +43,7 @@ class EntriesController < ApplicationController
 
   def notify_reviewers
     EntryMailer.new_entry(@entry).deliver_now
+    @entry.update_attributes(reviewer_notified: Time.zone.now)
     redirect_to @entry, notice: "The reviewers have been notified."
   end
 

@@ -12,7 +12,8 @@ ul.list-unstyled
 
 .btn-group
   = link_to "Add Reviewer", new_entry_entry_reviewer_path(@entry), class: "btn btn-primary"
-  = link_to "Notify Reviewers", notify_reviewers_entry_path(@entry), class: "btn btn-default"
+  - unless @entry.reviewer_notified?
+    = link_to "Notify Reviewers", notify_reviewers_entry_path(@entry), class: "btn btn-default"
   = link_to "Edit", edit_entry_path(@entry), class: "btn btn-default"
   = link_to "Back", entries_path, class: "btn btn-default"
 
